@@ -11,6 +11,8 @@ pnpm-lock.yaml
 package-lock.json
 
 # ---- 运行/中间产物 ----
+*.zip
+prototype.zip
 tools/pdf-pages/
 tools/shot/
 tools/crop.png
