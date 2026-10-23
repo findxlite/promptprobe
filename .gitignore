@@ -1,0 +1,27 @@
+# ---- 密钥与本地配置（绝不提交）----
+.env
+*.env
+!.env.example
+prototype/.env
+
+# ---- 依赖 ----
+node_modules/
+**/node_modules/
+pnpm-lock.yaml
+package-lock.json
+
+# ---- 运行/中间产物 ----
+tools/pdf-pages/
+tools/shot/
+tools/crop.png
+tools/req.pdf
+tools/streams.txt
+tools/sec*.txt
+*.log
+
+# ---- 系统与编辑器 ----
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+desktop.ini

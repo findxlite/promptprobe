@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PromptProbe · 大模型应用安全体检</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>" />
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <div class="logo">🛡️</div>
+    <div>
+      <h1>PromptProbe <span class="zh">提示探针</span></h1>
+      <p class="sub">大模型应用安全体检平台 · 自动红队扫描 + 一键加固复测</p>
+    </div>
+  </div>
+  <div class="topright">
+    <span id="modeBadge" class="badge badge-sim">加载中…</span>
+    <span id="modelInfo" class="model-info"></span>
+  </div>
+</header>
+
+<main class="layout">
+  <!-- ============ 左：控制台 ============ -->
+  <section class="col-left">
+    <div class="card">
+      <h2>1 · 选择受测应用</h2>
+      <div id="profileList" class="profile-list"><div class="skeleton">加载中…</div></div>
+
+      <details class="custom-block">
+        <summary>自定义被测系统提示词（接入你自己的应用）</summary>
+        <p class="hint">粘贴目标应用的 system prompt。若不含 <code>sk-…</code>、<code>XX-XXX-0000</code> 形式的凭据，金丝雀判定会自动降级为 n-gram / 语义判定。</p>
+        <textarea id="customPrompt" rows="6" placeholder="例如：你是 XX 公司的客服助手，内部活动码为 ABC-1234……"></textarea>
+      </details>
+    </div>
+
+    <div class="card">
+      <h2>2 · 扫描配置</h2>
+      <div class="field">
+        <label>攻击用例数 <b id="caseCountVal">24</b></label>
+        <input id="caseCount" type="range" min="8" max="40" step="4" value="24" />
+      </div>
+      <div class="field">
+        <label>随机种子（决定用例集，复测需保持一致）</label>
+        <input id="seed" type="number" value="20251031" />
+      </div>
+      <button id="btnScan" class="btn btn-primary btn-block">开始安全体检</button>
+      <p class="hint">扫描只针对已获授权的自有应用；攻击用例全程本地生成，不会外发到第三方。</p>
+    </div>
+
+    <div class="card disclaimer">
+      <h3>⚠️ 合规声明</h3>
+      <p>本工具用于对自己拥有或已书面授权的应用做安全评估。任何未经授权的攻击行为都可能违法。课程作业场景下，全部被测对象为内置示例应用。</p>
+    </div>
+  </section>
+
+  <!-- ============ 右：结果区 ============ -->
+  <section class="col-right">
+    <div id="empty" class="card empty">
+      <div class="empty-icon">🎯</div>
+      <h2>选择应用并开始体检</h2>
+      <p>系统将针对该应用的 system prompt 与工具清单，自动生成覆盖「提示词泄露 / 敏感信息泄露 / 过度代理 / 越狱」四类威胁的攻击用例，逐条投递并判定，最后给出可解释的评分卡与加固方案。</p>
+    </div>
+
+    <div id="panelProgress" class="card hidden">
+      <h2>正在扫描 <span id="progressText" class="mono"></span></h2>
+      <div class="progress"><div id="progressBar" class="bar"></div></div>
+      <ul id="liveLog" class="live-log"></ul>
+    </div>
+
+    <div id="panelResult" class="hidden">
+      <div class="card scorecard">
+        <div class="score-left">
+          <div class="ring" id="scoreRing">
+            <div class="ring-inner">
+              <div id="scoreVal" class="score-val">--</div>
+              <div class="score-label">安全评分</div>
+            </div>
+          </div>
+          <div id="riskLevel" class="risk-level">—</div>
+        </div>
+        <div class="score-right">
+          <div class="kpis">
+            <div class="kpi"><span class="kpi-v" id="kpiAsr">—</span><span class="kpi-l">攻击成功率 ASR</span></div>
+            <div class="kpi"><span class="kpi-v" id="kpiBreach">—</span><span class="kpi-l">成功攻击 / 总用例</span></div>
+            <div class="kpi"><span class="kpi-v" id="kpiFpr">—</span><span class="kpi-l">误报率（正常业务被拦）</span></div>
+            <div class="kpi"><span class="kpi-v" id="kpiDet">—</span><span class="kpi-l">判定器 F1</span></div>
+          </div>
+          <div class="meta-line" id="runMeta"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>分类维度</h2>
+        <div id="catBars" class="cat-bars"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h2>用例明细</h2>
+          <div class="filters" id="filters">
+            <button class="chip active" data-f="all">全部</button>
+            <button class="chip" data-f="breach">攻击成功</button>
+            <button class="chip" data-f="safe">已拦截</button>
+            <button class="chip" data-f="control">对照</button>
+          </div>
+        </div>
+        <div id="caseList" class="case-list"></div>
+      </div>
+
+      <div class="card actions">
+        <button id="btnHarden" class="btn btn-primary">一键生成加固方案</button>
+        <button id="btnRescan" class="btn" disabled>用加固方案复测</button>
+        <button id="btnReport" class="btn btn-ghost" disabled>导出体检报告（.md）</button>
+      </div>
+    </div>
+
+    <div id="panelHarden" class="card hidden">
+      <h2>加固方案 <span class="tag">Defense-in-Depth</span></h2>
+      <div id="hardenRules" class="harden-rules"></div>
+      <details class="hardened-prompt">
+        <summary>加固后的系统提示词全文</summary>
+        <pre id="hardenPrompt"></pre>
+      </details>
+    </div>
+
+    <div id="panelCompare" class="hidden">
+      <div class="card">
+        <h2>加固前后对比</h2>
+        <div id="compareBars" class="compare-bars"></div>
+        <table id="compareTable" class="table"></table>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="toast" class="toast hidden"></div>
+<script src="/app.js"></script>
+</body>
+</html>

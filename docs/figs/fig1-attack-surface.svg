@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 600" width="980" height="600" font-family="Microsoft YaHei, PingFang SC, sans-serif">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect width="980" height="600" fill="#ffffff"/>
+  <!-- 分层背景 -->
+  <rect x="24" y="56" width="590" height="96" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="36" y="76" font-size="12.5" fill="#64748b">① 输入端（一律视为不可信数据）</text>
+  <rect x="24" y="162" width="590" height="104" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="36" y="182" font-size="12.5" fill="#64748b">② 提示与上下文层</text>
+  <rect x="24" y="276" width="590" height="86" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="36" y="296" font-size="12.5" fill="#64748b">③ 模型推理层</text>
+  <rect x="24" y="372" width="590" height="96" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="36" y="392" font-size="12.5" fill="#64748b">④ 工具与输出层（可能产生副作用）</text>
+
+  <!-- 输入框 -->
+  <rect x="60" y="88" width="170" height="48" rx="8" fill="#ffffff" stroke="#94a3b8"/>
+  <text x="145" y="117" font-size="13.5" text-anchor="middle" fill="#0f172a">终端用户输入</text>
+  <rect x="250" y="84" width="190" height="56" rx="8" fill="#ffffff" stroke="#94a3b8"/>
+  <text x="345" y="106" font-size="13" text-anchor="middle" fill="#0f172a">间接注入载体</text>
+  <text x="345" y="124" font-size="11" text-anchor="middle" fill="#64748b">网页/邮件/文档/代码注释</text>
+
+  <!-- 提示层 -->
+  <rect x="60" y="196" width="170" height="58" rx="8" fill="#eef2ff" stroke="#6366f1"/>
+  <text x="145" y="220" font-size="13.5" text-anchor="middle" fill="#312e81" font-weight="600">系统提示词</text>
+  <text x="145" y="238" font-size="11.5" text-anchor="middle" fill="#4338ca">角色 / 规则 / 机密值</text>
+  <rect x="250" y="196" width="150" height="58" rx="8" fill="#ffffff" stroke="#94a3b8"/>
+  <text x="325" y="220" font-size="13" text-anchor="middle" fill="#0f172a">提示模板拼装</text>
+  <text x="325" y="238" font-size="11.5" text-anchor="middle" fill="#64748b">指令与数据拼接</text>
+  <rect x="420" y="196" width="160" height="58" rx="8" fill="#ffffff" stroke="#94a3b8"/>
+  <text x="500" y="220" font-size="13" text-anchor="middle" fill="#0f172a">检索增强上下文</text>
+  <text x="500" y="238" font-size="11.5" text-anchor="middle" fill="#64748b">RAG 片段 / 记忆</text>
+
+  <!-- 模型 -->
+  <rect x="230" y="296" width="210" height="50" rx="8" fill="#0f172a"/>
+  <text x="335" y="318" font-size="14" text-anchor="middle" fill="#ffffff" font-weight="600">大模型（LLM）</text>
+  <text x="335" y="335" font-size="11.5" text-anchor="middle" fill="#cbd5e1">指令跟随，但难以区分指令与数据</text>
+
+  <!-- 工具与输出 -->
+  <rect x="60" y="400" width="160" height="52" rx="8" fill="#ffffff" stroke="#94a3b8"/>
+  <text x="140" y="422" font-size="13" text-anchor="middle" fill="#0f172a">业务工具 / 插件</text>
+  <text x="140" y="439" font-size="11.5" text-anchor="middle" fill="#64748b">查询 / 退款 / 执行命令</text>
+  <rect x="250" y="400" width="160" height="52" rx="8" fill="#ffffff" stroke="#94a3b8"/>
+  <text x="330" y="422" font-size="13" text-anchor="middle" fill="#0f172a">下游业务系统</text>
+  <text x="330" y="439" font-size="11.5" text-anchor="middle" fill="#64748b">订单 / 成绩 / 仓库</text>
+  <rect x="440" y="400" width="150" height="52" rx="8" fill="#ffffff" stroke="#94a3b8"/>
+  <text x="515" y="422" font-size="13" text-anchor="middle" fill="#0f172a">最终用户可见输出</text>
+  <text x="515" y="439" font-size="11.5" text-anchor="middle" fill="#64748b">渲染 / 播报 / 落库</text>
+
+  <!-- 连线 -->
+  <line x1="145" y1="136" x2="145" y2="166" stroke="#475569" stroke-width="1.3"/>
+  <line x1="145" y1="166" x2="290" y2="166" stroke="#475569" stroke-width="1.3"/>
+  <line x1="290" y1="166" x2="290" y2="193" stroke="#475569" stroke-width="1.3" marker-end="url(#ar)"/>
+  <line x1="345" y1="140" x2="345" y2="166" stroke="#475569" stroke-width="1.3"/>
+  <line x1="345" y1="166" x2="360" y2="166" stroke="#475569" stroke-width="1.3"/>
+  <line x1="360" y1="166" x2="360" y2="193" stroke="#475569" stroke-width="1.3" marker-end="url(#ar)"/>
+  <line x1="230" y1="225" x2="247" y2="225" stroke="#475569" stroke-width="1.3" marker-end="url(#ar)"/>
+  <line x1="400" y1="225" x2="417" y2="225" stroke="#475569" stroke-width="1.3" marker-end="url(#ar)"/>
+  <path d="M500,254 L500,272 L360,272 L360,293" fill="none" stroke="#475569" stroke-width="1.3" marker-end="url(#ar)"/>
+  <path d="M300,346 L300,372 L205,372 L205,397" fill="none" stroke="#475569" stroke-width="1.3" marker-end="url(#ar)"/>
+  <line x1="220" y1="426" x2="247" y2="426" stroke="#475569" stroke-width="1.3" marker-end="url(#ar)"/>
+  <path d="M370,346 L370,372 L515,372 L515,397" fill="none" stroke="#475569" stroke-width="1.3" marker-end="url(#ar)"/>
+
+  <!-- 编号标记：标在"可以被攻破的资产"左侧，与右图例一一对应 -->
+  <g font-size="12" font-weight="700">
+    <circle cx="46" cy="112" r="9" fill="#dc2626"/><text x="46" y="116" text-anchor="middle" fill="#fff">1</text>
+    <circle cx="46" cy="225" r="9" fill="#4f46e5"/><text x="46" y="229" text-anchor="middle" fill="#fff">2</text>
+    <circle cx="46" cy="426" r="9" fill="#ea580c"/><text x="46" y="430" text-anchor="middle" fill="#fff">3</text>
+    <circle cx="428" cy="426" r="9" fill="#dc2626"/><text x="428" y="430" text-anchor="middle" fill="#fff">4</text>
+  </g>
+
+  <!-- 右侧威胁图例 -->
+  <text x="640" y="80" font-size="13.5" font-weight="600" fill="#334155">攻击面（OWASP LLM Top 10 · 2025）</text>
+
+  <rect x="640" y="92" width="316" height="88" rx="9" fill="#fef2f2" stroke="#fca5a5"/>
+  <circle cx="662" cy="112" r="9" fill="#dc2626"/><text x="662" y="116" font-size="12" font-weight="700" text-anchor="middle" fill="#fff">1</text>
+  <text x="680" y="116" font-size="13" font-weight="600" fill="#b91c1c">LLM01 提示注入 / 越狱</text>
+  <text x="656" y="136" font-size="11.5" fill="#7f1d1d">用户输入或第三方内容被当成指令，</text>
+  <text x="656" y="152" font-size="11.5" fill="#7f1d1d">直接改写模型行为、绕过拒绝策略。</text>
+  <text x="656" y="170" font-size="11.5" fill="#7f1d1d">典型投递：编码、角色扮演、文档隐藏。</text>
+
+  <rect x="640" y="190" width="316" height="88" rx="9" fill="#eef2ff" stroke="#a5b4fc"/>
+  <circle cx="662" cy="210" r="9" fill="#4f46e5"/><text x="662" y="214" font-size="12" font-weight="700" text-anchor="middle" fill="#fff">2</text>
+  <text x="680" y="214" font-size="13" font-weight="600" fill="#3730a3">LLM07 系统提示词泄露</text>
+  <text x="656" y="234" font-size="11.5" fill="#312e81">系统提示词里的业务规则、内部策略</text>
+  <text x="656" y="250" font-size="11.5" fill="#312e81">被原文复述或被"改写摘要"后外泄，</text>
+  <text x="656" y="268" font-size="11.5" fill="#312e81">为后续绕过提供情报。</text>
+
+  <rect x="640" y="288" width="316" height="88" rx="9" fill="#fff7ed" stroke="#fdba74"/>
+  <circle cx="662" cy="308" r="9" fill="#ea580c"/><text x="662" y="312" font-size="12" font-weight="700" text-anchor="middle" fill="#fff">3</text>
+  <text x="680" y="312" font-size="13" font-weight="600" fill="#9a3412">LLM06 过度代理</text>
+  <text x="656" y="332" font-size="11.5" fill="#7c2d12">被诱导调用工具越权访问他人数据、</text>
+  <text x="656" y="348" font-size="11.5" fill="#7c2d12">执行删除或外联命令，产生真实副作用。</text>
+  <text x="656" y="366" font-size="11.5" fill="#7c2d12">危害等级最高的一类。</text>
+
+  <rect x="640" y="386" width="316" height="88" rx="9" fill="#fef2f2" stroke="#fca5a5"/>
+  <circle cx="662" cy="406" r="9" fill="#dc2626"/><text x="662" y="410" font-size="12" font-weight="700" text-anchor="middle" fill="#fff">4</text>
+  <text x="680" y="410" font-size="13" font-weight="600" fill="#b91c1c">LLM02 敏感信息泄露</text>
+  <text x="656" y="430" font-size="11.5" fill="#7f1d1d">埋在提示词或上下文中的密钥、口令、</text>
+  <text x="656" y="446" font-size="11.5" fill="#7f1d1d">内部活动码进入回答或示例代码，</text>
+  <text x="656" y="464" font-size="11.5" fill="#7f1d1d">可直接造成资金与数据损失。</text>
+
+  <rect x="640" y="484" width="316" height="42" rx="9" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="656" y="502" font-size="11.5" fill="#475569">四类威胁全部可在"给定 system prompt 的黑盒对话"中</text>
+  <text x="656" y="518" font-size="11.5" fill="#475569">被自动化验证 —— 这正是 PromptProbe 的靶场。</text>
+
+  <!-- 底部注释 -->
+  <rect x="24" y="484" width="590" height="42" rx="9" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="502" font-size="11.5" fill="#475569">关键机理：大模型使用同一自回归通道处理"指令"与"数据"，</text>
+  <text x="40" y="518" font-size="11.5" fill="#475569">因此任何进入上下文的内容都具备潜在指令权（Prompt Injection 的根因）。</text>
+
+  </svg>

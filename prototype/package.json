@@ -1,0 +1,16 @@
+{
+  "name": "promptprobe",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "PromptProbe —— 大模型应用安全体检平台（MVP）：自动红队扫描 + 一键加固复测",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "selftest": "node scripts/selftest.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
