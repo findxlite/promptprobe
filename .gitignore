@@ -1,16 +1,16 @@
-# ---- 密钥与本地配置（绝不提交）----
+﻿# ---- 瀵嗛挜涓庢湰鍦伴厤缃紙缁濅笉鎻愪氦锛?---
 .env
 *.env
 !.env.example
 prototype/.env
 
-# ---- 依赖 ----
+# ---- 渚濊禆 ----
 node_modules/
 **/node_modules/
 pnpm-lock.yaml
 package-lock.json
 
-# ---- 运行/中间产物 ----
+# ---- 杩愯/涓棿浜х墿 ----
 *.zip
 prototype.zip
 tools/pdf-pages/
@@ -21,9 +21,13 @@ tools/streams.txt
 tools/sec*.txt
 *.log
 
-# ---- 系统与编辑器 ----
+# ---- 绯荤粺涓庣紪杈戝櫒 ----
 .DS_Store
 Thumbs.db
 .vscode/
 .idea/
 desktop.ini
+
+# 个人网站相关的一次性脚本与预览截图（不属于课程交付）
+tools/web-*.mjs
+tools/web-preview/
