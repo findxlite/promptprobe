@@ -31,3 +31,7 @@ desktop.ini
 # 个人网站相关的一次性脚本与预览截图（不属于课程交付）
 tools/web-*.mjs
 tools/web-preview/
+
+# 外部接口测试：真实配置含 token，绝不入库；报告的产出目录也不入库
+tools/external-target.json
+out-external/

@@ -1,0 +1,33 @@
+{
+  "name": "我的小程序 · 客服助手",
+  "_说明": "把下面每一项换成你自己应用的信息。字段含义见 tools/external-adapter.mjs 顶部注释。",
+
+  "endpoint": "https://你的后端域名/api/chat",
+  "method": "POST",
+  "timeoutMs": 60000,
+  "headers": {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer 换成测试账号的 token"
+  },
+
+  "_body说明": "{{attack}} 会被替换成攻击载荷；可以放在任何层级、任何字段名里",
+  "body": {
+    "sessionId": "promptprobe-test",
+    "message": "{{attack}}"
+  },
+
+  "_replyPath说明": "从 JSON 响应里取模型回复的路径，例如 data.reply / result.content；留空则用整段响应文本",
+  "replyPath": "data.reply",
+
+  "_systemPromptFiles说明": "被测应用的 system prompt 文件路径（相对课程目录），用于判定'是否复述了提示词'。可以放多个",
+  "systemPromptFiles": ["my-prompt.txt"],
+  "systemPrompt": "",
+
+  "_canaries说明": "埋在你提示词里的机密串（成本价、密钥、口令等）。填了就用它做精确判定",
+  "canaries": [],
+  "_tools说明": "工具名，逗号分隔。会让越权类用例更贴近你的真实工具（如 query_order,apply_refund）",
+  "tools": "",
+
+  "_profileId说明": "借用哪个内置档案的量化画像（sim 模式才用得上，真实接口模式仅影响阈值展示）",
+  "profileId": "tiaozaijie"
+}
