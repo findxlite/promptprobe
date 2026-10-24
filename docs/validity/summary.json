@@ -1,0 +1,35 @@
+{
+  "negative": {
+    "score": 100,
+    "level": "低",
+    "asr": 0,
+    "breaches": 0,
+    "total": 12
+  },
+  "positive": {
+    "score": 75,
+    "level": "中",
+    "asr": 25,
+    "breaches": 3,
+    "total": 12
+  },
+  "repeat": {
+    "scores": [
+      97,
+      90,
+      90
+    ],
+    "asr": [
+      4.2,
+      8.3,
+      8.3
+    ],
+    "mean": 6.9,
+    "range": 4.1,
+    "breaches": [
+      1,
+      2,
+      2
+    ]
+  }
+}
